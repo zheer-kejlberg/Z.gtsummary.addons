@@ -1,0 +1,115 @@
+---
+title: "Functions to modify gtsummary baseline tables"
+author: "Zheer Kejlberg Al-Mashhadi"
+date: "2023-11-19"
+output: github_document
+---
+
+## Adding SMDs and rounding counts and percentages
+
+In this document, the functions in the package are presented with examples.
+First, the *round_5_gtsummary()* function is demonstrated, followed by the *add_SMD()* function
+  
+<br>
+  
+<br>
+  
+### Installing the package
+
+```{r, eval = FALSE}
+
+install.packages("devtools")
+library(devtools)
+install_github("zheer-kejlberg/Z.gtsummary.addons")
+
+```
+
+```{r, echo = FALSE, results = 'hide', message=FALSE, warning=FALSE, error=FALSE}
+
+source("R/add_SMD.R")
+
+```
+  
+<br>
+    
+<br>
+  
+### **round_5_gtsummary()**
+  
+<br>
+  
+#### For unweighted data (with a *tbl_summary()* object), see the following examples:
+
+For one SMD per variable, the location argument does not need to be specified (as it defaults to *"label"*).
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+trial %>% 
+  tbl_summary(by = grade, include = c(age, stage)) %>%
+  add_SMD()
+```
+  
+<br>
+  
+For one SMD per level of every categorical variable, you must specify *location = "level"*
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+trial %>% 
+  tbl_summary(by = grade, include = c(age, stage)) %>%
+  add_SMD(location = "level")
+```
+<center>
+###### \*Notice, this only gives SMDs on levels of *categorical* variables.
+</center>
+\
+  
+<br> 
+  
+There's also the option to set *location = "both"* to get both kinds of SMDs simultaneously. 
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+trial %>%
+  tbl_summary(by = grade, include = c(age, stage)) %>%
+  add_SMD(location = "both")
+
+```
+  
+<br>
+  
+To get confidence intervals, add *ci = TRUE*. With the *decimals* argument, you can adjust the number of significant digits displayed.
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+trial %>% 
+  tbl_summary(by = grade, include = c(age, stage)) %>%
+  add_SMD(location = "level", ci = TRUE, decimals = 3)
+```
+  
+<br>
+  
+To change the formatting of the confidence intervals, use the *ci_bracket* and *ci_sep* arguments:
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+  trial %>% 
+  tbl_summary(by = grade, include = c(age, stage)) %>%
+  add_SMD(location = "level", ci = TRUE, ci_bracket="[]", ci_sep=";")
+```
+  
+<br>
+  
+<br>
+  
+#### For weighted data, use *tbl_svysummary()*:
+
+In this example, we use weights from **WeightIt** package. The **survey** package delivers the necessary *svydesign* object.
+```{r, results='hide', warning=FALSE, message=FALSE, error=FALSE}
+
+library(WeightIt) # To calculate weights
+library(survey) # To create a surveydesign object (a "weighted" dataset)
+```
+
+Application of the *add_SMD()* function is identical to the non-weighted case, but it is applied to a *tbl_svysummary* object instead of a *tbl_summary* object.
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+trial %>% mutate(
+  w = weightit(grade ~ age + stage + trt, data = ., focal="I")$weights) %>% # create ATT weights
+  survey::svydesign(~1, data = ., weights = ~w) %>% # create the svydesign object
+  tbl_svysummary(by = grade, include = c(age, stage)) %>%
+  add_SMD(ref_group = TRUE)
+
+```
+<center>
+###### \*Notice, comparisons are only made here between *group I* and all other groups due to the use of *ref_group = TRUE*
+</center>
