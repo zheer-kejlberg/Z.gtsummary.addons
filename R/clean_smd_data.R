@@ -1,7 +1,7 @@
 #' clean_smd_data
 #'
-#' See See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
-#'
+#' @seealso See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
+#' @description This is an internal Z.gtsummary.addons function
 #' @name clean_smd_data
 #' @rdname clean_smd_data
 #' @keywords internal

@@ -1,6 +1,6 @@
 #' add_SMD
 #'
-#' See \code{\link[Z.gtsummary.addons::tbl_summary]{tbl_summary}} and \code{\link[Z.gtsummary.addons::tbl_svysummary]{tbl_svysummary}}
+#' @seealso See \code{\link[Z.gtsummary.addons::tbl_summary]{tbl_summary}} and \code{\link[Z.gtsummary.addons::tbl_svysummary]{tbl_svysummary}}
 #'
 #' @name add_SMD
 #' @rdname add_SMD
