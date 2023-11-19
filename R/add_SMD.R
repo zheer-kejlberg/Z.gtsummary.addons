@@ -4,6 +4,7 @@ library(gtsummary) # For creating a baseline characteristics table
 library(tidyverse) # For data wrangling and misc.
 library(smd) # for calculating the SMDs
 library(purrr) # for vectorised functions
+library(stringr) # for manipulating strings
 
 
 #### 2) Create the core functionality, via **core_smd_function()**, for taking the data and outputting the SMD results

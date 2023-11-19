@@ -6,10 +6,12 @@ Author: Zheer Kejlberg Al-Mashhadi
 Maintainer: Zheer Kejlberg Al-Mashhadi <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL-2
 Encoding: UTF-8
 Imports:
     gtsummary,
     smd,
     dplyr,
-    purrr
+    purrr,
+    stringr,
+    rlang
