@@ -17,8 +17,7 @@ followed by the *add_SMD()* function
 
 ``` r
 install.packages("devtools")
-library(devtools)
-install_github("zheer-kejlberg/Z.gtsummary.addons")
+devtools::install_github("zheer-kejlberg/Z.gtsummary.addons")
 library(Z.gtsummary.addons)
 ```
 
@@ -41,7 +40,7 @@ trial %>%
   add_SMD()
 ```
 
-<div id="mzdfjmtptf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nromyhqkjf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -125,7 +124,7 @@ trial %>%
   add_SMD(location = "level")
 ```
 
-<div id="fxwrsuibfd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gmhntjiebd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -216,7 +215,7 @@ trial %>%
   add_SMD(location = "both")
 ```
 
-<div id="truvjmjqas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ypedpzqkma" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -300,7 +299,7 @@ trial %>%
   add_SMD(location = "level", ci = TRUE, decimals = 3)
 ```
 
-<div id="lsodlnkdiv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wqqpyljfdn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -384,7 +383,7 @@ To change the formatting of the confidence intervals, use the
   add_SMD(location = "level", ci = TRUE, ci_bracket="[]", ci_sep=";")
 ```
 
-<div id="oepehaeqza" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="torkyfujwj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -483,7 +482,7 @@ trial %>% mutate(
   add_SMD(ref_group = TRUE)
 ```
 
-<div id="luvnvmdlgl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lhuobugjgr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -561,17 +560,17 @@ trial %>% mutate(
 
 ### **round_5_gtsummary()**
 
-The function can be run on both *tbl_summary* and *tbl_svysummary*
-objects.
+<br>
 
-For comparison, here’s a table without rounding:
+The function can be run on both *tbl_summary* and *tbl_svysummary*
+objects.   For comparison, here’s a table without rounding:
 
 ``` r
 trial %>% 
   tbl_summary(by = grade, include = c(trt, age, stage))
 ```
 
-<div id="rygkpddwbj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="knitixrftm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -643,7 +642,7 @@ trial %>%
   round_5_gtsummary()
 ```
 
-<div id="flvdvfhisi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ynzzysmlwf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
@@ -719,7 +718,7 @@ weighted_trial %>%
   round_5_gtsummary()
 ```
 
-<div id="lcrawwwzph" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jdptyouypu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
