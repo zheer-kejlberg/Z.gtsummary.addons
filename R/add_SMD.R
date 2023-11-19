@@ -4,6 +4,7 @@
 #'
 #' @name add_SMD
 #' @rdname add_SMD
+#' @author Zheer Kejlberg Al-Mashhadi
 #' @description This function takes a tbl_summary or tbl_svysummary object as input and adds columns with standardised mean differences (SMDs) between the "by"-groups in the table. There is the option to compute SMDs between every possible pair of groups or, alternatively, between one reference group and all other groups.
 #' @export
 #' @usage add_SMD(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep)
@@ -14,6 +15,8 @@
 #' @param ci_bracket Character. Default is set to "{}". Any string can be specified; the first character will be used as the opening bracket for the confidence interval, and the second character as the closing bracket.
 #' @param ci_sep Character. Default is ", ". Specified the separator characters to use between the lower and the upper confidence bounds.
 #' @return Returns a tbl_summary or tbl_svysummary object (same as the input to the "tbl" argument) with added SMDs.
+#' @examples library(gtsummary)
+#'   trial \%>\% tbl_summary(by = "trt") \%>\% add_SMD()
 #' @references [1]: Yang & Dalton (2012): A unified approach to measuring the effect size between two groups using SAS® (https://support.sas.com/resources/papers/proceedings12/335-2012.pdf)
 
 #### add_SMD(): Create the main function to be called by users.

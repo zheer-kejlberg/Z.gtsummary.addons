@@ -4,6 +4,7 @@
 #' @description This is an internal Z.gtsummary.addons function
 #' @name clean_smd_data
 #' @rdname clean_smd_data
+#' @author Zheer Kejlberg Al-Mashhadi
 #' @keywords internal
 #' @export
 
