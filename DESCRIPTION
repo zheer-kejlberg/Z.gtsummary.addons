@@ -12,6 +12,12 @@ Imports:
     gtsummary,
     smd,
     dplyr,
+    tidyr,
+    tibble,
+    tidyselect,
+    stats,
     purrr,
     stringr,
-    rlang
+    rlang,
+    magrittr
+RoxygenNote: 7.2.3

@@ -18,6 +18,8 @@ First, the *round_5_gtsummary()* function is demonstrated, followed by the *add_
 
 ```{r, eval = FALSE}
 
+
+
 install.packages("devtools")
 library(devtools)
 install_github("zheer-kejlberg/Z.gtsummary.addons")
@@ -26,6 +28,10 @@ install_github("zheer-kejlberg/Z.gtsummary.addons")
 
 ```{r, echo = FALSE, results = 'hide', message=FALSE, warning=FALSE, error=FALSE}
 
+#setwd("/Users/au341374/GitHub/Z.gtsummary.addons")
+
+library(magrittr)
+library(gtsummary)
 source("R/add_SMD.R")
 
 ```

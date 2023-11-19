@@ -7,31 +7,9 @@ clean_smd_data
 \description{
 Internal Z.gtsummary.addons function
 }
-\usage{
 
-}
-%- maybe also 'usage' for other objects documented here.
-\arguments{
-
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Zheer Kejlberg Al-Mashhadi
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -39,8 +17,7 @@ Internal Z.gtsummary.addons function
 \seealso{
 `add_SMD`
 }
-\examples{
-}
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):
 % \keyword{ ~kwd1 }

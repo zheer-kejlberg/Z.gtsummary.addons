@@ -31,9 +31,7 @@ Character. Default is set to "{}". Any string can be specified; the first charac
 Character. Default is ", ". Specified the separator characters to use between the lower and the upper confidence bounds.
 }
 }
-\details{
 
-}
 \value{
 Returns a tbl_summary or tbl_svysummary object (same as the input to the "tbl" argument) with added SMDs.
 }
@@ -43,9 +41,7 @@ Returns a tbl_summary or tbl_svysummary object (same as the input to the "tbl" a
 \author{
 Zheer Kejlberg Al-Mashhadi
 }
-\note{
-%%  ~~further notes~~
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
@@ -55,8 +51,8 @@ Zheer Kejlberg Al-Mashhadi
 }
 \examples{
 
-library(gtsummary)
-trial \%>\% tbl_summary(by = "trt") \%>\% add_SMD()
+### library(gtsummary)
+### trial \%>\% tbl_summary(by = "trt") \%>\% add_SMD()
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

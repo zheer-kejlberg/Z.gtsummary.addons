@@ -1,10 +1,10 @@
 #### 1) Load dependencies
 
-library(gtsummary) # For creating a baseline characteristics table
-library(tidyverse) # For data wrangling and misc.
-library(smd) # for calculating the SMDs
-library(purrr) # for vectorised functions
-library(stringr) # for manipulating strings
+# library(gtsummary) # For creating a baseline characteristics table
+# library(tidyverse) # For data wrangling and misc.
+# library(smd) # for calculating the SMDs
+# library(purrr) # for vectorised functions
+# library(stringr) # for manipulating strings
 
 
 #### 2) Create the core functionality, via **core_smd_function()**, for taking the data and outputting the SMD results
@@ -13,18 +13,18 @@ core_smd_function <- function(data, is_weighted, location, ref_group, ci, decima
   # MAKE A TABLE OF EVERY POSSIBLE COMBO OF TWO DIFFERENT GROUPS
   groups <- factor(unique(data$by))
   pairs <- expand.grid(groups, groups) %>%
-    arrange(as.integer(.data$Var1), as.integer(.data$Var2)) %>%
-    filter(Var1 != Var2) %>%
-    filter(!duplicated(
+    dplyr::arrange(as.integer(.data$Var1), as.integer(.data$Var2)) %>%
+    dplyr::filter(Var1 != Var2) %>%
+    dplyr::filter(!duplicated(
       paste0(pmax(as.character(Var1), as.character(Var2)),
              pmin(as.character(Var1), as.character(Var2)))))
   if (ref_group) { # IF ref_group, KEEP ONLY PAIRS CONTAINING THE REF GROUP
-    pairs <- pairs %>% filter(Var1 == first(levels(groups)))
+    pairs <- pairs %>% dplyr::filter(Var1 == dplyr::first(levels(groups)))
   }
 
   # CREATE COLUMN NAMES FOR EACH CALCULATED SMD
   create_colname <- function(pair) {
-    filtered_data <- data %>% filter(by %in% pair) %>% mutate(by = factor(by))
+    filtered_data <- data %>% dplyr::filter(by %in% pair) %>% dplyr::mutate(by = factor(by))
     paste0("SMD: ", levels(filtered_data$by)[1], " vs. ", levels(filtered_data$by)[2])
   }
   comparisons <- apply(pairs, 1, create_colname)
@@ -33,8 +33,8 @@ core_smd_function <- function(data, is_weighted, location, ref_group, ci, decima
   # CREATE SUBSETS OF DATA
   subsetting <- function(pair, data) {
     as.data.frame(data) %>%
-      filter(by %in% pair) %>%
-      mutate(by = factor(by)) %>%
+      dplyr::filter(by %in% pair) %>%
+      dplyr::mutate(by = factor(by)) %>%
       droplevels()
   }
   data_subsets <- apply(X = pairs, MARGIN = 1, FUN = subsetting, data = data)
@@ -63,32 +63,32 @@ core_smd_function <- function(data, is_weighted, location, ref_group, ci, decima
   smd_estimates <- purrr::map_chr(data_subsets, ~ calc_SMD(., is_weighted, ci, decimals))
 
   # OUTPUT THE RESULTS
-  tibble(comp = comparisons, smd = smd_estimates) %>%
-    spread(comp, smd) %>%
-    relocate(any_of(comparisons))
+  tibble::tibble(comp = comparisons, smd = smd_estimates) %>%
+    tidyr::spread(comp, smd) %>%
+    dplyr::relocate(tidyselect::any_of(comparisons))
 }
 
 
 #### 3) Create a function *clean_smd_data()* to prepare the input data for use by the *core_smd_function()*
 
 clean_smd_data <- function(data, variable, by, tbl) {
-  tbl_type <- first(class(tbl))
+  tbl_type <- dplyr::first(class(tbl))
   if (tbl_type != "tbl_svysummary" & tbl_type != "tbl_summary") {
     stop("Inappropriate input to smd function")
   }
   is_weighted <- tbl_type == "tbl_svysummary"
 
   if (is_weighted) {
-    data <- data$variables %>% mutate(weight_var = 1 / data$allprob[[1]])
+    data <- data$variables %>% dplyr::mutate(weight_var = 1 / data$allprob[[1]])
   } else {
-    data <- data %>% mutate(weight_var = 1)
+    data <- data %>% dplyr::mutate(weight_var = 1)
   }
 
-  data <- dplyr::select(data, all_of(c(variable, by, "weight_var"))) %>%
+  data <- dplyr::select(data, tidyselect::all_of(c(variable, by, "weight_var"))) %>%
     rlang::set_names(c("variable", "by", "weight_var")) %>%
-    dplyr::filter(complete.cases(.))
+    dplyr::filter(stats::complete.cases(.))
   if (is.character(data$variable)) {
-    data <- data %>% mutate(variable = factor(variable))
+    data <- data %>% dplyr::mutate(variable = factor(variable))
   }
   if (is.factor(data$variable)) {
     levels <- levels(data$variable)
@@ -132,22 +132,22 @@ add_SMD <- function(tbl, location = "label", ref_group = FALSE, ci = FALSE, deci
                                   ci_bracket = ci_bracket, ci_sep = ci_sep)
     } else { # location == "level"
       execute_by_level <- function(data, level, is_weighted) {
-        data <- data %>% mutate(variable = variable == level)
+        data <- data %>% dplyr::mutate(variable = variable == level)
         core_smd_function(data, is_weighted,
                           location = location, ref_group = ref_group,
                           ci = ci, decimals = decimals,
                           ci_bracket = ci_bracket, ci_sep = ci_sep)
       }
-      output <- map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
+      output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
     }
     return(output)
   }
 
   if (location == "both") {
     location <- "label"
-    tbl <- tbl %>% add_stat(fns = everything() ~ fun, location = ~ "label")
+    tbl <- tbl %>% gtsummary::add_stat(fns = everything() ~ fun, location = ~ "label")
     location <- "level"
-    tbl <- tbl %>% add_stat(fns = everything() ~ fun, location = ~ "level")
+    tbl <- tbl %>% gtsummary::add_stat(fns = everything() ~ fun, location = ~ "level")
 
     duplicates <- stringr::str_subset(tbl$table_styling$header$column, "^SMD(\r\n|\r|\n|.)* $")
     duplicates <- stringr::str_remove(duplicates, " $")
@@ -170,13 +170,13 @@ add_SMD <- function(tbl, location = "label", ref_group = FALSE, ci = FALSE, deci
       # Finally merge and reinstate the original column title
       merge_pattern <- paste0("{",column_names[indices][1],"}{",column_names[indices][2],"}")
       tbl <- tbl %>%
-        modify_column_merge(pattern = merge_pattern) %>%
-        modify_header(column_names[indices][1] ~ duplicates[i])
+        gtsummary::modify_column_merge(pattern = merge_pattern) %>%
+        gtsummary::modify_header(column_names[indices][1] ~ duplicates[i])
 
     }
 
   } else {
-    tbl <- tbl %>% add_stat(fns = everything() ~ fun, location = ~ location)
+    tbl <- tbl %>% gtsummary::add_stat(fns = everything() ~ fun, location = ~ location)
   }
   return(tbl)
 
