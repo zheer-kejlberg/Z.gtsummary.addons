@@ -16,6 +16,9 @@ core_smd_function(
 )
 }
 \description{
-See See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
+This is an internal Z.gtsummary.addons function
+}
+\seealso{
+See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
 }
 \keyword{internal}
