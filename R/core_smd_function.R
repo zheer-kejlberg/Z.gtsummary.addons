@@ -1,5 +1,14 @@
-#### add_SMD(): Create the core functionality for taking the data and outputting the SMD results
+#' core_smd_function
+#'
+#' See See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
+#'
+#' @name core_smd_function
+#' @rdname core_smd_function
+#' @keywords internal
 #' @export
+
+#### add_SMD(): Create the core functionality for taking the data and outputting the SMD results
+
 core_smd_function <- function(data, is_weighted, location, ref_group, ci, decimals, ci_bracket, ci_sep) {
   # MAKE A TABLE OF EVERY POSSIBLE COMBO OF TWO DIFFERENT GROUPS
   groups <- factor(unique(data$by))

@@ -1,5 +1,15 @@
-#### add_SMD(): Create a function to prepare the input data for use by the *core_smd_function()*
+#' clean_smd_data
+#'
+#' See See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
+#'
+#' @name clean_smd_data
+#' @rdname clean_smd_data
+#' @keywords internal
 #' @export
+
+
+#### add_SMD(): Create a function to prepare the input data for use by the *core_smd_function()*
+
 clean_smd_data <- function(data, variable, by, tbl) {
   tbl_type <- dplyr::first(class(tbl))
   if (tbl_type != "tbl_svysummary" & tbl_type != "tbl_summary") {
