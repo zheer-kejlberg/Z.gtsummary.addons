@@ -8,7 +8,6 @@ rmarkdown::render('ignore/README.Rmd',
                   quiet = T)
 file.remove("README.html")
 
-
 tx  <- readLines("README.md")
 tx <- paste(tx, collapse="\n")
 tx  <- gsub(pattern = "<style>(\r\n|\r|\n|.)*?<[/]style>", replacement = "", x = tx)

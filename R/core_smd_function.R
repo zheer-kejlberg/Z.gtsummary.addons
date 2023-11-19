@@ -1,5 +1,5 @@
 #### add_SMD(): Create the core functionality for taking the data and outputting the SMD results
-
+#' @export
 core_smd_function <- function(data, is_weighted, location, ref_group, ci, decimals, ci_bracket, ci_sep) {
   # MAKE A TABLE OF EVERY POSSIBLE COMBO OF TWO DIFFERENT GROUPS
   groups <- factor(unique(data$by))

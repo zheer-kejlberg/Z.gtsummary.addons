@@ -47,7 +47,7 @@ Zheer Kejlberg Al-Mashhadi
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-`tbl_summary` and `tbl_svysummary`
+See \code{\link[Z.gtsummary.addons::tbl_summary]{tbl_summary}} and \code{\link[Z.gtsummary.addons::tbl_svysummary]{tbl_svysummary}}
 }
 \examples{
 

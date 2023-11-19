@@ -1,5 +1,5 @@
 #### add_SMD(): Create a function to prepare the input data for use by the *core_smd_function()*
-
+#' @export
 clean_smd_data <- function(data, variable, by, tbl) {
   tbl_type <- dplyr::first(class(tbl))
   if (tbl_type != "tbl_svysummary" & tbl_type != "tbl_summary") {

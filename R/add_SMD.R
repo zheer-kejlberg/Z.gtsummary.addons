@@ -1,5 +1,5 @@
 #### add_SMD(): Create the main function to be called by users.
-
+#' @export
 add_SMD <- function(tbl, location = "label", ref_group = FALSE, ci = FALSE, decimals = 2, ci_bracket = "()", ci_sep=", ") {
   fun <- function(data, variable, by, tbl, ...) {
     clean_data <- clean_smd_data(data, variable, by, tbl)

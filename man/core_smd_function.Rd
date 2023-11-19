@@ -16,7 +16,7 @@ Zheer Kejlberg Al-Mashhadi
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-`add_SMD`
+See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
