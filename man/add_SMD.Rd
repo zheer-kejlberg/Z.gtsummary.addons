@@ -26,8 +26,8 @@ Returns a tbl_summary or tbl_svysummary object (same as the input to the "tbl" a
 This function takes a tbl_summary or tbl_svysummary object as input and adds columns with standardised mean differences (SMDs) between the "by"-groups in the table. There is the option to compute SMDs between every possible pair of groups or, alternatively, between one reference group and all other groups.
 }
 \examples{
-library(gtsummary)
-  trial \\%>\\% tbl_summary(by = "trt") \\%>\\% add_SMD()
+  \dontrun{library(gtsummary)
+  trial \%>\% tbl_summary(by = "trt") \%>\% add_SMD()}
 }
 \references{
 [1]: Yang & Dalton (2012): A unified approach to measuring the effect size between two groups using SAS® (https://support.sas.com/resources/papers/proceedings12/335-2012.pdf)

@@ -15,8 +15,9 @@
 #' @param ci_bracket Character. Default is set to "{}". Any string can be specified; the first character will be used as the opening bracket for the confidence interval, and the second character as the closing bracket.
 #' @param ci_sep Character. Default is ", ". Specified the separator characters to use between the lower and the upper confidence bounds.
 #' @return Returns a tbl_summary or tbl_svysummary object (same as the input to the "tbl" argument) with added SMDs.
-#' @examples library(gtsummary)
-#'   trial \%>\% tbl_summary(by = "trt") \%>\% add_SMD()
+#' @examples
+#'   \dontrun{library(gtsummary)
+#'   trial %>% tbl_summary(by = "trt") %>% add_SMD()}
 #' @references [1]: Yang & Dalton (2012): A unified approach to measuring the effect size between two groups using SAS® (https://support.sas.com/resources/papers/proceedings12/335-2012.pdf)
 
 #### add_SMD(): Create the main function to be called by users.

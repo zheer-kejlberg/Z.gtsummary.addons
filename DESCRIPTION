@@ -1,11 +1,12 @@
 Package: Z.gtsummary.addons
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Functions for modifying gtsummary baseline tables in various ways
 Version: 0.1.0
 Author: Zheer Kejlberg Al-Mashhadi
-Maintainer: Zheer Kejlberg Al-Mashhadi <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Maintainer: Zheer Kejlberg Al-Mashhadi
+Description: This package contains functions to modify  tbl_summary/tbl_svysummary baseline tables.
+    The first function, add_SMD, adds standardised mean differences (SMDs) between any number of groups in a baseline table.
+    The second function, round_5_gtsummary, helps avoid microdata in tables by rounding counts to nearest 5 (and adjusting percentages accordingly).
 License: GPL-2
 Encoding: UTF-8
 Imports:

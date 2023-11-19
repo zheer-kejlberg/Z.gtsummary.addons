@@ -6,6 +6,7 @@
 #' @rdname clean_smd_data
 #' @author Zheer Kejlberg Al-Mashhadi
 #' @keywords internal
+#' @usage NULL
 #' @export
 
 

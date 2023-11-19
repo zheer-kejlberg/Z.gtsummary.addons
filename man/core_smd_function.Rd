@@ -3,18 +3,6 @@
 \name{core_smd_function}
 \alias{core_smd_function}
 \title{core_smd_function}
-\usage{
-core_smd_function(
-  data,
-  is_weighted,
-  location,
-  ref_group,
-  ci,
-  decimals,
-  ci_bracket,
-  ci_sep
-)
-}
 \description{
 This is an internal Z.gtsummary.addons function
 }

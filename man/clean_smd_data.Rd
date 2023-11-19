@@ -3,9 +3,6 @@
 \name{clean_smd_data}
 \alias{clean_smd_data}
 \title{clean_smd_data}
-\usage{
-clean_smd_data(data, variable, by, tbl)
-}
 \description{
 This is an internal Z.gtsummary.addons function
 }

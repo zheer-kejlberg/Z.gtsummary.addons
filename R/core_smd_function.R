@@ -6,6 +6,7 @@
 #' @rdname core_smd_function
 #' @author Zheer Kejlberg Al-Mashhadi
 #' @keywords internal
+#' @usage NULL
 #' @export
 
 #### add_SMD(): Create the core functionality for taking the data and outputting the SMD results
