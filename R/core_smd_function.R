@@ -1,6 +1,6 @@
 #' core_smd_function
 #'
-#' @seealso See \code{\link[Z.gtsummary.addons::add_SMD]{add_SMD}}
+#' @seealso See \code{\link{add_SMD}}
 #' @description This is an internal Z.gtsummary.addons function
 #' @name core_smd_function
 #' @rdname core_smd_function

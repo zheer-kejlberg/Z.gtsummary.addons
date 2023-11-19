@@ -4,10 +4,10 @@
 \alias{round_5_gtsummary}
 \title{round_5_gtsummary}
 \usage{
-round_5_gtsummary(tabæe)
+round_5_gtsummary(table)
 }
 \arguments{
-\item{table}{Must a gtsummary object of type 'tbl_summary' or 'tbl_svysummary'.}
+\item{table}{Must be a gtsummary object of type 'tbl_summary' or 'tbl_svysummary'.}
 }
 \value{
 Returns a tbl_summary or tbl_svysummary object (same as the input to the "table" argument).

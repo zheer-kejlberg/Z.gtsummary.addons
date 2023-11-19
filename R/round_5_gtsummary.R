@@ -5,8 +5,8 @@
 #' @author Zheer Kejlberg Al-Mashhadi
 #' @description This function takes a tbl_summary or tbl_svysummary object as input and rounds all counts to nearest 5. If counts are between 0-4, the output will be "<5". Similarly, if counts are between n and n-4, the output will be ">{n-5}".
 #' @export
-#' @usage round_5_gtsummary(tabæe)
-#' @param table Must a gtsummary object of type 'tbl_summary' or 'tbl_svysummary'.
+#' @usage round_5_gtsummary(table)
+#' @param table Must be a gtsummary object of type 'tbl_summary' or 'tbl_svysummary'.
 #' @return Returns a tbl_summary or tbl_svysummary object (same as the input to the "table" argument).
 #' @examples
 #'   \dontrun{library(gtsummary)

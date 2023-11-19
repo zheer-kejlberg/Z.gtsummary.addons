@@ -1,6 +1,6 @@
 #' add_SMD
 #'
-#' @seealso See \code{\link[Z.gtsummary.addons::tbl_summary]{tbl_summary}} and \code{\link[Z.gtsummary.addons::tbl_svysummary]{tbl_svysummary}}
+#' @seealso See \code{\link[gtsummary]{tbl_summary}} and \code{\link[gtsummary]{tbl_svysummary}}
 #'
 #' @name add_SMD
 #' @rdname add_SMD
@@ -8,6 +8,7 @@
 #' @description This function takes a tbl_summary or tbl_svysummary object as input and adds columns with standardised mean differences (SMDs) between the "by"-groups in the table. There is the option to compute SMDs between every possible pair of groups or, alternatively, between one reference group and all other groups.
 #' @export
 #' @usage add_SMD(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep)
+#' @param tbl Must be a gtsummary object of type 'tbl_summary' or 'tbl_svysummary'.
 #' @param location Can be set to "label" (one SMD is computed for each variable; for categorical variables, a Mahalanobis distance is computed [1]), "level" (an SMD is computed for every level of categorical variables), or "both" (a combination of both "label" and "level"). Default is "label".
 #' @param ref_group Binary. If TRUE, group 1 is set as a reference group, and SMDs are computed between it and all other groups. If FALSE, every pairwise combination of groups is computed. Default is FALSE.
 #' @param ci Binary. If TRUE, confidence intervals are added to the SMDs.

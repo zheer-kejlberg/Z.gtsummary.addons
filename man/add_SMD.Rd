@@ -7,6 +7,8 @@
 add_SMD(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep)
 }
 \arguments{
+\item{tbl}{Must be a gtsummary object of type 'tbl_summary' or 'tbl_svysummary'.}
+
 \item{location}{Can be set to "label" (one SMD is computed for each variable; for categorical variables, a Mahalanobis distance is computed [1]), "level" (an SMD is computed for every level of categorical variables), or "both" (a combination of both "label" and "level"). Default is "label".}
 
 \item{ref_group}{Binary. If TRUE, group 1 is set as a reference group, and SMDs are computed between it and all other groups. If FALSE, every pairwise combination of groups is computed. Default is FALSE.}
@@ -33,7 +35,7 @@ This function takes a tbl_summary or tbl_svysummary object as input and adds col
 [1]: Yang & Dalton (2012): A unified approach to measuring the effect size between two groups using SAS® (https://support.sas.com/resources/papers/proceedings12/335-2012.pdf)
 }
 \seealso{
-See \code{\link[Z.gtsummary.addons::tbl_summary]{tbl_summary}} and \code{\link[Z.gtsummary.addons::tbl_svysummary]{tbl_svysummary}}
+See \code{\link{tbl_summary}} and \code{\link{tbl_svysummary}}
 }
 \author{
 Zheer Kejlberg Al-Mashhadi
