@@ -24,11 +24,20 @@
 #### add_SMD(): Create the main function to be called by users.
 
 add_SMD <- function(tbl, location = "label", ref_group = FALSE, ci = FALSE, decimals = 2, ci_bracket = "()", ci_sep=", ") {
+
+  for (variable in tbl$meta_data$variable) { # first, make variables factors if their type is set to categorical
+    if (tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)] == "categorical") {
+      tbl$inputs$data[[variable]] <- factor(tbl$inputs$data[[variable]])
+    }
+  }
+
   fun <- function(data, variable, by, tbl, ...) {
     clean_data <- clean_smd_data(data, variable, by, tbl)
     data <- clean_data[[1]]
     levels <- clean_data[[2]]
     is_weighted <- clean_data[[3]]
+    summary_type <- tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)]
+
 
     if (location == "label") {
       output <- core_smd_function(data, is_weighted,
@@ -36,14 +45,22 @@ add_SMD <- function(tbl, location = "label", ref_group = FALSE, ci = FALSE, deci
                                   ci = ci, decimals = decimals,
                                   ci_bracket = ci_bracket, ci_sep = ci_sep)
     } else { # location == "level"
-      execute_by_level <- function(data, level, is_weighted) {
-        data <- data %>% dplyr::mutate(variable = variable == level)
-        core_smd_function(data, is_weighted,
-                          location = location, ref_group = ref_group,
-                          ci = ci, decimals = decimals,
-                          ci_bracket = ci_bracket, ci_sep = ci_sep)
+      if (summary_type == "continuous2") {
+        output <- core_smd_function(data, is_weighted,
+                                    location = location, ref_group = ref_group,
+                                    ci = ci, decimals = decimals,
+                                    ci_bracket = ci_bracket, ci_sep = ci_sep, return_empty = TRUE)
+      } else { # all other summary tyopes
+        execute_by_level <- function(data, level, is_weighted) {
+          data <- data %>% dplyr::mutate(variable = variable == level)
+          core_smd_function(data, is_weighted,
+                            location = location, ref_group = ref_group,
+                            ci = ci, decimals = decimals,
+                            ci_bracket = ci_bracket, ci_sep = ci_sep)
+        }
+        output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
       }
-      output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
+
     }
     return(output)
   }
