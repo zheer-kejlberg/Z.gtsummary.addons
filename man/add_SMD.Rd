@@ -35,7 +35,7 @@ This function takes a tbl_summary or tbl_svysummary object as input and adds col
 [1]: Yang & Dalton (2012): A unified approach to measuring the effect size between two groups using SAS® (https://support.sas.com/resources/papers/proceedings12/335-2012.pdf)
 }
 \seealso{
-See \code{\link{tbl_summary}} and \code{\link{tbl_svysummary}}
+See \code{\link[gtsummary]{tbl_summary}} and \code{\link[gtsummary]{tbl_svysummary}}
 }
 \author{
 Zheer Kejlberg Al-Mashhadi
