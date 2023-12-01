@@ -39,28 +39,20 @@ add_SMD <- function(tbl, location = "label", ref_group = FALSE, ci = FALSE, deci
     summary_type <- tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)]
 
 
-    if (location == "label") {
+    if (location == "label" | (location == "level" & summary_type == "continuous2")) {
       output <- core_smd_function(data, is_weighted,
                                   location = location, ref_group = ref_group,
                                   ci = ci, decimals = decimals,
                                   ci_bracket = ci_bracket, ci_sep = ci_sep)
     } else { # location == "level"
-      if (summary_type == "continuous2") {
-        output <- core_smd_function(data, is_weighted,
-                                    location = location, ref_group = ref_group,
-                                    ci = ci, decimals = decimals,
-                                    ci_bracket = ci_bracket, ci_sep = ci_sep, return_empty = TRUE)
-      } else { # all other summary tyopes
-        execute_by_level <- function(data, level, is_weighted) {
-          data <- data %>% dplyr::mutate(variable = variable == level)
-          core_smd_function(data, is_weighted,
-                            location = location, ref_group = ref_group,
-                            ci = ci, decimals = decimals,
-                            ci_bracket = ci_bracket, ci_sep = ci_sep)
-        }
-        output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
+      execute_by_level <- function(data, level, is_weighted) {
+        data <- data %>% dplyr::mutate(variable = variable == level)
+        core_smd_function(data, is_weighted,
+                          location = location, ref_group = ref_group,
+                          ci = ci, decimals = decimals,
+                          ci_bracket = ci_bracket, ci_sep = ci_sep)
       }
-
+      output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
     }
     return(output)
   }

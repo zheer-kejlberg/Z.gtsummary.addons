@@ -11,7 +11,7 @@
 
 #### add_SMD(): Create the core functionality for taking the data and outputting the SMD results
 
-core_smd_function <- function(data, is_weighted, location, ref_group, ci, decimals, ci_bracket, ci_sep, return_empty = FALSE) {
+core_smd_function <- function(data, is_weighted, location, ref_group, ci, decimals, ci_bracket, ci_sep) {
   # MAKE A TABLE OF EVERY POSSIBLE COMBO OF TWO DIFFERENT GROUPS
   groups <- factor(unique(data$by))
   pairs <- expand.grid(groups, groups) %>%
@@ -63,7 +63,6 @@ core_smd_function <- function(data, is_weighted, location, ref_group, ci, decima
   calc_SMD <- purrr::possibly(.f = calc_SMD, otherwise = NA_character_)
 
   smd_estimates <- purrr::map_chr(data_subsets, ~ calc_SMD(., is_weighted, ci, decimals))
-  if (return_empty) { smd_estimates <- NA_character_ }
 
   # OUTPUT THE RESULTS
   tibble::tibble(comp = comparisons, smd = smd_estimates) %>%
