@@ -21,74 +21,13 @@
 #'   trial %>% tbl_summary(by = "trt") %>% add_SMD()}
 #' @references [1]: Yang & Dalton (2012): A unified approach to measuring the effect size between two groups using SAS® (https://support.sas.com/resources/papers/proceedings12/335-2012.pdf)
 
-#### add_SMD(): Create the main function to be called by users.
+#### add_SMD(): Determine {gtsummary} version and call the corresponding add_SMD() version
 
 add_SMD <- function(tbl, location = "label", ref_group = FALSE, ci = FALSE, decimals = 2, ci_bracket = "()", ci_sep=", ") {
-
-  for (variable in tbl$meta_data$variable) { # first, make variables factors if their type is set to categorical
-    if (tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)] == "categorical") {
-      tbl$inputs$data[[variable]] <- factor(tbl$inputs$data[[variable]])
-    }
-  }
-
-  fun <- function(data, variable, by, tbl, ...) {
-    clean_data <- clean_smd_data(data, variable, by, tbl)
-    data <- clean_data[[1]]
-    levels <- clean_data[[2]]
-    is_weighted <- clean_data[[3]]
-    summary_type <- tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)]
-
-
-    if (location == "label" | (location == "level" & summary_type == "continuous2")) {
-      output <- core_smd_function(data, is_weighted,
-                                  location = location, ref_group = ref_group,
-                                  ci = ci, decimals = decimals,
-                                  ci_bracket = ci_bracket, ci_sep = ci_sep)
-    } else { # location == "level"
-      execute_by_level <- function(data, level, is_weighted) {
-        data <- data %>% dplyr::mutate(variable = variable == level)
-        core_smd_function(data, is_weighted,
-                          location = location, ref_group = ref_group,
-                          ci = ci, decimals = decimals,
-                          ci_bracket = ci_bracket, ci_sep = ci_sep)
-      }
-      output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
-    }
-    return(output)
-  }
-
-  if (location == "both") {
-    location <- "label"
-    tbl <- tbl %>% gtsummary::add_stat(fns = everything() ~ fun, location = ~ "label")
-    location <- "level"
-    tbl <- tbl %>% gtsummary::add_stat(fns = everything() ~ fun, location = ~ "level")
-
-    duplicates <- stringr::str_subset(tbl$table_styling$header$column, "^SMD(\r\n|\r|\n|.)* $")
-    duplicates <- stringr::str_remove(duplicates, " $")
-
-    for (i in 1:length(duplicates)) {
-      # Temporarily change column names for use by gtsummary
-      column_names <- colnames(tbl$table_body)
-      indices <- which(column_names == duplicates[i] | column_names == paste0(duplicates[i], " "))
-      column_names[indices] <- stringr::str_replace_all(column_names[indices], "[: .]", "_")
-      colnames(tbl$table_body) <- column_names
-
-      # Adjust the digits of the SMDs and turn into character (while hiding NAs)
-      format_smd <- function(column) {
-        column[is.na(column)] <- ""
-        return(column)
-      }
-      tbl$table_body[[column_names[indices][1]]] <- format_smd(tbl$table_body[[column_names[indices][1]]])
-      tbl$table_body[[column_names[indices][2]]] <- format_smd(tbl$table_body[[column_names[indices][2]]])
-
-      # Finally merge and reinstate the original column title
-      merge_pattern <- paste0("{",column_names[indices][1],"}{",column_names[indices][2],"}")
-      tbl <- tbl %>%
-        gtsummary::modify_column_merge(pattern = merge_pattern) %>%
-        gtsummary::modify_header(column_names[indices][1] ~ duplicates[i])
-    }
+  gtsummary_version <- as.integer(substring(packageVersion("gtsummary"), 1, 1))
+  if (gtsummary_version >= 2) {
+    add_SMD_v2(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep)
   } else {
-    tbl <- tbl %>% gtsummary::add_stat(fns = everything() ~ fun, location = ~ location)
+    add_SMD_v1(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep)
   }
-  return(tbl)
 }

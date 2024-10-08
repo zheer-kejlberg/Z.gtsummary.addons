@@ -9,7 +9,6 @@
 #' @usage NULL
 #' @export
 
-
 #### add_SMD(): Create a function to prepare the input data for use by the *core_smd_function()*
 
 clean_smd_data <- function(data, variable, by, tbl) {
