@@ -12,8 +12,6 @@
 #### add_SMD(): Create the main function to be called when {gtsummary} version < v2.0.0
 
 add_SMD_v1 <- function(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep) {
-
-  tbl <<- tbl
   for (variable in tbl$meta_data$variable) { # first, make variables factors if their type is set to categorical
     if (tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)] == "categorical") {
       tbl$inputs$data[[variable]] <- factor(tbl$inputs$data[[variable]])
@@ -21,7 +19,7 @@ add_SMD_v1 <- function(tbl, location, ref_group, ci, decimals, ci_bracket, ci_se
   }
 
   fun <- function(data, variable, by, tbl, ...) {
-    clean_data <<- clean_smd_data(data, variable, by, tbl)
+    clean_data <- clean_smd_data(data, variable, by, tbl)
     data <- clean_data[[1]]
     levels <- clean_data[[2]]
     is_weighted <- clean_data[[3]]
