@@ -12,10 +12,6 @@
 #### add_SMD(): Create the main function to be called when {gtsummary} version < v2.0.0
 
 add_SMD_v1 <- function(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep) {
-
-  # For now just an error that {gtsummary} neds updating
-  stop("You are using an outdated version of the package {gtsummary}. Please update to version 2.0.0 or newer for this function to work.")
-
   for (variable in tbl$meta_data$variable) { # first, make variables factors if their type is set to categorical
     if (tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)] == "categorical") {
       tbl$inputs$data[[variable]] <- factor(tbl$inputs$data[[variable]])
