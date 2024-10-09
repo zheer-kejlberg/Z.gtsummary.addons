@@ -42,7 +42,7 @@ add_SMD_v2 <- function(tbl, location, ref_group, ci, decimals, ci_bracket, ci_se
       }
       output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
     } else {
-      output <- tibble()
+      output <- tibble::tibble()
     }
     return(output)
   }
