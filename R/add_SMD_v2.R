@@ -14,26 +14,27 @@
 add_SMD_v2 <- function(tbl, location, ref_group, ci, decimals, ci_bracket, ci_sep) {
 
   tbl <<- tbl
-  for (variable in tbl$meta_data$variable) { # first, make variables factors if their type is set to categorical
-    if (tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)] == "categorical") {
+  for (variable in names(tbl[["inputs"]][["type"]])) { # first, make variables factors if their type is set to categorical
+    if (tbl[["inputs"]][["type"]][[variable]] == "categorical") {
       tbl$inputs$data[[variable]] <- factor(tbl$inputs$data[[variable]])
     }
   }
 
   fun <- function(data, variable, by, tbl, ...) {
+
     clean_data <<- clean_smd_data(data, variable, by, tbl)
     data <- clean_data[[1]]
     levels <- clean_data[[2]]
     is_weighted <- clean_data[[3]]
-    summary_type <- tbl$meta_data$summary_type[which(tbl$meta_data$variable == variable)]
+    summary_type <- tbl$inputs$type[[variable]]
 
 
-    if (location == "label" | (location == "level" & summary_type == "continuous2")) {
+    if (location == "label") {
       output <- core_smd_function(data, is_weighted,
                                   location = location, ref_group = ref_group,
                                   ci = ci, decimals = decimals,
                                   ci_bracket = ci_bracket, ci_sep = ci_sep)
-    } else { # location == "level"
+    } else if (location == "level" & summary_type == "categorical") { # location == "level"
       execute_by_level <- function(data, level, is_weighted) {
         data <- data %>% dplyr::mutate(variable = variable == level)
         core_smd_function(data, is_weighted,
@@ -42,8 +43,9 @@ add_SMD_v2 <- function(tbl, location, ref_group, ci, decimals, ci_bracket, ci_se
                           ci_bracket = ci_bracket, ci_sep = ci_sep)
       }
       output <- purrr::map_dfr(levels, .f = ~ execute_by_level(data, .x, is_weighted))
+    } else {
+      output <- tibble()
     }
-    print(output)
     return(output)
   }
 
