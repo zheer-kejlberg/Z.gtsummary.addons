@@ -1,7 +1,7 @@
 Package: Z.gtsummary.addons
 Type: Package
 Title: Functions for modifying gtsummary baseline tables in various ways
-Version: 0.1.0
+Version: 1.0.0
 Author: Zheer Kejlberg Al-Mashhadi
 Maintainer: Zheer Kejlberg Al-Mashhadi <nomail@me.com>
 Description: This package contains functions to modify tbl_summary/tbl_svysummary baseline tables.
