@@ -2,6 +2,8 @@
 
 export("%>%")
 export(add_SMD)
+export(add_SMD_v1)
+export(add_SMD_v2)
 export(clean_smd_data)
 export(core_smd_function)
 export(round_5_gtsummary)
