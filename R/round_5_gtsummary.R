@@ -34,13 +34,14 @@ round_5_gtsummary <- function(table) {
 
   body <- table$table_body
   stats_column_indices <- which(grepl("^stat_", colnames(body)))
+  missing_text <- table$inputs$missing_text
 
   Ns <- table$table_styling$header$modify_stat_n[c(stats_column_indices)]
   table$table_styling$header$label[c(stats_column_indices)] <- paste0("**", table$table_styling$header$modify_stat_level[c(stats_column_indices)], "**", ", N = ", round_5(Ns))
 
   for (column_no in stats_column_indices) {
     column <- dplyr::pull(body, column_no)
-    cat_indices <- (body$var_type == "categorical" | body$var_type == "dichotomous" | body$label == "Unknown") & !is.na(body$stat_1)
+    cat_indices <- (body$var_type == "categorical" | body$var_type == "dichotomous" | body$label == missing_text) & !is.na(body$stat_1)
     N <- table$table_styling$header$modify_stat_n[column_no]
     column[cat_indices] <- sapply(column[cat_indices], round_5_get_summary, N = N)
     table$table_body[column_no] <- column
