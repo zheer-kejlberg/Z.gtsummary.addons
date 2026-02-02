@@ -33,7 +33,7 @@ round_5_gtsummary <- function(table) {
   }
 
   body <- table$table_body
-  stats_column_indices <- which(grepl("^stat_", colnames(body)))
+  stats_column_indices <- which(grepl("^stat_[0-9]+", colnames(body)))
   missing_text <- table$inputs$missing_text
 
   Ns <- table$table_styling$header$modify_stat_n[c(stats_column_indices)]
